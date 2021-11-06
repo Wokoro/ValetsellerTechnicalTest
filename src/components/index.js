@@ -2,4 +2,6 @@
  * @author - wokorosamuel@yahoo.com
  */
 
-export default [];
+import productRoutes from './product/index'
+
+export default [...productRoutes];

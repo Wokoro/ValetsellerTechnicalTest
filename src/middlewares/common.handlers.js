@@ -37,10 +37,11 @@ export const corsHandler = (router) => {
   if (process.env.NODE_ENV !== "production") {
     whitelist = [
       "http://localhost:3000",
-      "http://localhost:5056"
+      "http://localhost:5056",
+      "https://valetsellerfront-test.netlify.app"
     ];
   } else {
-    whitelist = [];
+    whitelist = ["https://valetsellerfront-test.netlify.app"];
   }
 
   const corsOptions = {

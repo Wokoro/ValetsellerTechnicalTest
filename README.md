@@ -30,3 +30,6 @@ git clone git@github.com:Wokoro/ValetsellerTechnicalTest.git
 npm install
 npm start
 ```
+
+## Documentation
+The documentation can be found [here](https://valetseller-test.herokuapp.com/api/v1/docs/)

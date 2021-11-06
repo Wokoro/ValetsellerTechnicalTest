@@ -1,0 +1,10 @@
+//exclude folders
+node_modules
+.nyc_output
+node_modules
+dist
+logs
+coverage
+
+//exclude files
+*.env

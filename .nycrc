@@ -1,0 +1,19 @@
+ {
+    "exclude": [
+      "components/location/*.js",
+      "components/**/validation.js",
+      "utils/**/*.js",
+      "tests/**/*.js",
+      "service/**/*.js"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "sourceMap": false,
+    "instrument": true
+  }

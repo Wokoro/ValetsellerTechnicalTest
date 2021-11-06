@@ -1,0 +1,10 @@
+//exclude folders
+node_modules
+.nyc_output
+coverage
+dist
+tests
+
+// exclude files
+*.md
+*.json

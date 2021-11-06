@@ -127,3 +127,50 @@ export const generateErrorReport = (req, res, next) => {
   }
   return next();
 };
+
+
+/**
+ * @description - Function to serialize ecomdash products information
+ *
+ * @param {object[]} data - Products information returned from ecomdash
+ *
+ * @returns {object} - Returns serialize product information
+ */
+export const productDataSerializer = (data) => {
+  const result = data.reduce((acc, { Id, Sku, QuantityOnHand, Warehouses }) => {
+    acc.products = acc.products ?? {};
+    acc.warehouses = acc.warehouses ?? {};
+    acc.warehouseProducts = acc.warehouseProducts ?? {};
+
+    if (!acc.products?.[Id]) {
+      acc.products[Id] = { id: Id, sku: Sku, quantityOnHand: QuantityOnHand }
+    }
+
+    Warehouses.forEach(({ WarehouseId, QuantityOnHand, WarehouseSKU, IsActive, IncludeInSyncBalance }) => {
+      if (!acc.warehouses?.[WarehouseId]) {
+        acc.warehouses[WarehouseId] = {
+          id: WarehouseId,
+          includeInSyncBalance: IncludeInSyncBalance
+        }
+      }
+
+      acc.warehouseProducts[`${Id}_${WarehouseId}`] = {
+        productId: Id,
+        warehouseId: WarehouseId,
+        quantityOnHand: QuantityOnHand,
+        warehouseSKU: WarehouseSKU,
+        isActive: IsActive
+      }
+    });
+
+    return acc;
+  }, {});
+
+  const { products, warehouses, warehouseProducts } = result;
+
+  return {
+    products: Object.values(products),
+    warehouses: Object.values(warehouses),
+    warehouseProducts: Object.values(warehouseProducts)
+  }
+}

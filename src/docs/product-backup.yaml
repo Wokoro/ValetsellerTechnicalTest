@@ -1,0 +1,53 @@
+paths:
+  /products/backup:
+    post:
+      summary: Product backup endpoint
+      tags:
+        - Product
+      operationId: productInfoBackup
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              skus:
+                type: array
+                items:
+                  type: string
+
+      responses:
+        200:
+          description: Successful product backup
+          content: application/json
+          schema:
+            example:
+              status: success
+              data: Products(s) backed up successfully
+
+        400:
+          description: Error retrieving information
+          content: application/json
+          schema:
+            example:
+              status: error
+              error: Error retrieving product information
+
+        404:
+          description: Error retrieving information
+          content: application/json
+          schema:
+            example:
+              status: error
+              error: Product information not found
+
+        406:
+          description: Unacceptable inputs
+          content: application/json
+          schema:
+            example:
+              status: error
+              avalidationError:
+                - skus must be an array with at lease 1 sku value
+                - skus value must be valid numeric values
